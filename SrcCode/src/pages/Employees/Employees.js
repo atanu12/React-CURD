@@ -12,7 +12,6 @@ import {
   TableRow,
   Toolbar,
   Grid,
-  Avatar,
 } from "@material-ui/core";
 
 import * as EmployeeServices from "../../service/EmployeeServices";
@@ -49,16 +48,10 @@ const useStyles = makeStyles({
     width: "75%",
   },
   newButton: {
-    justifyContent: 'center',
-    margin:'0'
+    position: "absolute",
+    right: "10px",
+    padding: "2em ",
   },
-
-  tableCel1: {
-    display: 'flex',  
-  },
-  avatar: {
-    marginRight:'10px'
-  }
 });
 
 // headCEll
@@ -128,14 +121,6 @@ function Employees() {
     }
   };
 
-  // Random Color Avatar
-  function randomColor() {
-    let hex = Math.floor(Math.random() * 0xFFFFFF);
-    let color = "#" + hex.toString(16);
-  
-    return color;
-  }
-
   return (
     <div>
       <PageHeader
@@ -147,8 +132,6 @@ function Employees() {
         {/*  */}
 
         <Toolbar>
-        <Grid  container
-        direction="row">
           <Grid item md={8} xs={12}>
             <Input
               label="Search Employees"
@@ -164,6 +147,7 @@ function Employees() {
             />
           </Grid>
           <Grid item md={4} xs={12}>
+            {" "}
             <Btn
               text="Add Contact"
               variant="outlined"
@@ -172,23 +156,16 @@ function Employees() {
               onClick={() => setOpenPopup(true)}
             />
           </Grid>
-          </Grid>
-          </Toolbar>
+        </Toolbar>
 
         <TblContainer>
           <TblHead />
           <TableBody>
             {recordsAfterPagingAndSorting().map((item) => (
               <TableRow>
-                
-                <TableCell key={item.id} className={classes.tableCel1}>
-                <Avatar className={classes.avatar}  style={{
-                  backgroundColor: randomColor()
-                }}> {item.fullName.charAt(0)} </Avatar>
-                  <div>
+                <TableCell key={item.id}>
                   <span className={classes.name}>{item.fullName}</span> <br />
                   <span className={classes.mail}>{item.email}</span>
-                  </div>
                 </TableCell>
                 <TableCell key={item.id}>
                   <span className={classes.company}>{item.company}</span>
